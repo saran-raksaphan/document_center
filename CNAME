@@ -1,1 +1,3 @@
-dkt-prod-th-docs.com
+Name/Host: www
+Type: CNAME
+Value/Points to: saran-raksaphan.github.io
