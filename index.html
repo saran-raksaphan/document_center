@@ -1,0 +1,3101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Center</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Monday.com Inspired CSS Variables */
+        :root {
+            --monday-blue: #0073ea;
+            --monday-purple: #a25ddc;
+            --monday-green: #00ca72;
+            --monday-orange: #ff9500;
+            --monday-red: #e2445c;
+            --monday-pink: #ff5ac4;
+            --monday-yellow: #ffcb00;
+            --monday-teal: #00d2d2;
+            
+            --primary: var(--monday-blue);
+            --success: var(--monday-green);
+            --warning: var(--monday-orange);
+            --danger: var(--monday-red);
+            --info: var(--monday-teal);
+            
+            --gray-50: #f8fafc;
+            --gray-100: #f6f7fb;
+            --gray-200: #e1e4e9;
+            --gray-300: #c4c7d0;
+            --gray-400: #a3a6b4;
+            --gray-500: #676879;
+            --gray-600: #5c5f70;
+            --gray-700: #323338;
+            --gray-800: #2d3142;
+            --gray-900: #1e1e2e;
+            
+            --white: #ffffff;
+            --surface: #ffffff;
+            --background: #f6f7fb;
+            
+            --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --radius-sm: 4px;
+            --radius-md: 8px;
+            --radius-lg: 12px;
+            --radius-xl: 16px;
+            
+            --transition: all 0.2s ease;
+            --transition-slow: all 0.3s ease;
+        }
+
+        /* Reset & Base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--background);
+            color: var(--gray-700);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 64px;
+            background: var(--white);
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            padding: 0 24px;
+            gap: 24px;
+            z-index: 100;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary);
+            white-space: nowrap;
+        }
+
+        .logo-icon { 
+            font-size: 28px;
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .mobile-menu-btn { 
+            display: none; 
+            background: none; 
+            border: none; 
+            color: var(--gray-600); 
+            font-size: 20px; 
+            cursor: pointer; 
+            padding: 8px;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background: var(--gray-100);
+        }
+
+        /* Navigation Tabs */
+        .nav-tabs {
+            display: flex;
+            gap: 8px;
+            margin-left: auto;
+            margin-right: 24px;
+        }
+
+        .nav-tab {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: var(--radius-md);
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .nav-tab:hover {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        .nav-tab.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .online-users { 
+            display: flex; 
+            align-items: center; 
+            gap: -6px; 
+        }
+
+        .online-user {
+            width: 36px; 
+            height: 36px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple));
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+            cursor: pointer; 
+            transition: var(--transition); 
+            position: relative; 
+            border: 3px solid var(--white);
+            box-shadow: var(--shadow-sm);
+            margin-left: -6px;
+        }
+
+        .online-user:first-child {
+            margin-left: 0;
+        }
+
+        .online-user:hover { 
+            transform: translateY(-2px) scale(1.05); 
+            z-index: 10;
+            box-shadow: var(--shadow-md);
+        }
+
+        .online-count {
+            background: var(--gray-700); 
+            color: white;
+            padding: 6px 12px; 
+            border-radius: var(--radius-xl); 
+            font-size: 12px; 
+            font-weight: 600;
+            margin-left: 12px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0 20px;
+            height: 40px;
+            border: none; 
+            border-radius: var(--radius-md); 
+            font-size: 14px; 
+            font-weight: 500;
+            cursor: pointer; 
+            transition: var(--transition); 
+            display: inline-flex; 
+            align-items: center;
+            gap: 8px; 
+            white-space: nowrap; 
+            font-family: inherit;
+            text-decoration: none;
+            justify-content: center;
+        }
+
+        .btn:hover { 
+            transform: translateY(-1px); 
+        }
+
+        .btn:active { 
+            transform: translateY(0); 
+        }
+
+        .btn-primary { 
+            background: var(--primary); 
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover { 
+            background: #0056b3;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-secondary { 
+            background: var(--gray-100); 
+            color: var(--gray-700); 
+            border: 1px solid var(--gray-200);
+        }
+
+        .btn-secondary:hover { 
+            background: var(--gray-200); 
+            border-color: var(--gray-300);
+        }
+
+        .btn-success { 
+            background: var(--success); 
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-success:hover { 
+            background: #00a85a;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--gray-600);
+            border: 1px solid transparent;
+        }
+
+        .btn-ghost:hover {
+            background: var(--gray-100);
+            color: var(--gray-700);
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar - Only for Documents page */
+        .sidebar {
+            position: fixed; 
+            top: 64px; 
+            left: 0; 
+            bottom: 0; 
+            width: 280px;
+            background: var(--white); 
+            border-right: 1px solid var(--gray-200); 
+            overflow-y: auto; 
+            transition: transform 0.3s ease; 
+            z-index: 90;
+            transform: translateX(-100%);
+        }
+
+        .sidebar.show {
+            transform: translateX(0);
+        }
+
+        .sidebar-header { 
+            padding: 24px; 
+            border-bottom: 1px solid var(--gray-200); 
+        }
+
+        .sidebar-title { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: var(--gray-800); 
+            margin-bottom: 16px; 
+        }
+
+        /* Filter Sections */
+        .filter-section { 
+            padding: 16px 24px; 
+            border-bottom: 1px solid var(--gray-200); 
+        }
+
+        .filter-title { 
+            font-size: 12px; 
+            font-weight: 600; 
+            color: var(--gray-500); 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; 
+            margin-bottom: 12px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .filter-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 4px; 
+        }
+
+        .filter-item {
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            padding: 8px 12px; 
+            border-radius: var(--radius-md);
+            cursor: pointer; 
+            transition: var(--transition); 
+            position: relative;
+        }
+
+        .filter-item:hover { 
+            background: var(--gray-100); 
+        }
+
+        .filter-item.active { 
+            background: rgba(0, 115, 234, 0.1); 
+            color: var(--primary); 
+            font-weight: 600; 
+        }
+
+        .filter-checkbox { 
+            width: 16px; 
+            height: 16px; 
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            border: 2px solid var(--gray-300);
+            background: white;
+            transition: var(--transition);
+        }
+
+        .filter-checkbox:checked {
+            background: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .filter-label { 
+            flex: 1; 
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .filter-count { 
+            font-size: 12px; 
+            color: var(--gray-500); 
+            background: var(--gray-100); 
+            padding: 2px 8px; 
+            border-radius: var(--radius-xl); 
+            font-weight: 600;
+        }
+
+        .filter-item.active .filter-count { 
+            background: var(--primary); 
+            color: white; 
+        }
+
+        /* Main Content */
+        .main-content { 
+            flex: 1; 
+            display: flex; 
+            flex-direction: column; 
+            margin-top: 64px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .main-content.with-sidebar {
+            margin-left: 280px;
+        }
+
+        #contentBody {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            min-height: 0; /* Fixes flexbox overflow issue */
+        }
+
+        /* Google-style Search Page */
+        .search-page {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: calc(100vh - 64px);
+            padding: 40px;
+        }
+
+        .search-logo {
+            font-size: 72px;
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-container-main {
+            width: 100%;
+            max-width: 600px;
+            margin-bottom: 32px;
+        }
+
+        .search-wrapper-main {
+            position: relative;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input-main {
+            width: 100%;
+            height: 56px;
+            padding: 0 120px 0 60px;
+            border: 2px solid var(--gray-200);
+            border-radius: var(--radius-xl);
+            font-size: 18px;
+            background: var(--white);
+            color: var(--gray-700);
+            transition: var(--transition);
+            font-family: inherit;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .search-btn-main {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 40px;
+            padding: 0 20px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-lg);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .search-btn-main:hover {
+            background: #0056b3;
+        }
+
+        .search-input-main:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(0, 115, 234, 0.1), var(--shadow-lg);
+        }
+
+        .search-icon-main {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--gray-400);
+            pointer-events: none;
+            width: 24px;
+            height: 24px;
+        }
+
+        .search-suggestions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            justify-content: center;
+            margin-bottom: 32px;
+            max-width: 800px;
+        }
+
+        .search-suggestion {
+            padding: 8px 16px;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            border-radius: var(--radius-xl);
+            font-size: 14px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: inherit;
+            font-weight: 500;
+        }
+
+        .search-suggestion:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-1px);
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .quick-stat {
+            background: var(--white);
+            padding: 24px;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .quick-stat:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .quick-stat-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+        }
+
+        .quick-stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+        }
+
+        .quick-stat-label {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* Enhanced Search Page Content Grid */
+        .search-content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 24px;
+            width: 100%;
+            max-width: 1200px;
+            margin-top: 40px;
+        }
+
+        .search-section {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            transition: var(--transition);
+        }
+
+        .search-section:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .search-section .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .search-section .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--gray-800);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Search Document List */
+        .search-document-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .search-document-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .search-document-item:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-200);
+        }
+
+        .search-document-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-document-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 4px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .search-document-meta {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        .search-document-meta .document-category {
+            font-size: 10px;
+            padding: 2px 6px;
+        }
+
+        /* Search Category List */
+        .search-category-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .search-category-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .search-category-item:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-200);
+        }
+
+        .search-category-icon {
+            font-size: 20px;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .search-category-info {
+            flex: 1;
+        }
+
+        .search-category-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .search-category-count {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        /* Quick Actions */
+        .quick-actions-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .quick-action-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            border: 1px solid transparent;
+            background: transparent;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: left;
+            font-family: inherit;
+        }
+
+        .quick-action-btn:hover {
+            background: var(--gray-50);
+            border-color: var(--gray-200);
+        }
+
+        .quick-action-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .quick-action-text {
+            flex: 1;
+        }
+
+        .quick-action-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 2px;
+        }
+
+        .quick-action-desc {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+
+        /* Search Activity List */
+        .search-activity-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .search-activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            border-radius: var(--radius-md);
+            background: var(--gray-50);
+        }
+
+        .search-activity-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .search-activity-text {
+            font-size: 13px;
+            color: var(--gray-700);
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+
+        .search-activity-time {
+            font-size: 11px;
+            color: var(--gray-400);
+        }
+
+        /* Empty Message */
+        .empty-message {
+            text-align: center;
+            padding: 20px;
+            color: var(--gray-500);
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        .content-header { 
+            background: var(--white); 
+            padding: 24px 32px; 
+            border-bottom: 1px solid var(--gray-200);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .content-title { 
+            font-size: 32px; 
+            font-weight: 700; 
+            color: var(--gray-800); 
+            margin-bottom: 4px; 
+        }
+
+        .content-subtitle { 
+            font-size: 16px; 
+            color: var(--gray-500);
+            font-weight: 400;
+        }
+
+        .content-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .content-body { 
+            flex: 1; 
+            overflow-y: auto; 
+            padding: 24px 32px; 
+        }
+
+        .view-toggle {
+            display: flex;
+            background: var(--gray-100);
+            border-radius: var(--radius-md);
+            padding: 4px;
+        }
+
+        .view-btn {
+            padding: 8px 16px;
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+            cursor: pointer;
+            border-radius: var(--radius-sm);
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+            font-family: inherit;
+        }
+
+        .view-btn.active {
+            background: var(--white);
+            color: var(--primary);
+            box-shadow: var(--shadow-xs);
+        }
+
+        /* Document Grid/Cards */
+        .document-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+            gap: 20px; 
+        }
+
+        .document-card {
+            background: var(--white); 
+            border: 1px solid var(--gray-200); 
+            border-radius: var(--radius-lg); 
+            padding: 20px;
+            cursor: pointer; 
+            transition: var(--transition); 
+            position: relative; 
+            display: flex; 
+            flex-direction: column;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .document-card:hover { 
+            border-color: var(--primary); 
+            box-shadow: var(--shadow-lg); 
+            transform: translateY(-4px); 
+        }
+
+        .document-header { 
+            display: flex; 
+            align-items: start; 
+            gap: 16px; 
+            margin-bottom: 16px; 
+        }
+
+        .document-icon {
+            width: 48px; 
+            height: 48px; 
+            border-radius: var(--radius-lg); 
+            display: flex; 
+            align-items: center;
+            justify-content: center; 
+            font-size: 24px; 
+            color: white; 
+            flex-shrink: 0;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .document-icon.doc { background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple)); }
+        .document-icon.sheet { background: linear-gradient(135deg, var(--monday-green), var(--monday-teal)); }
+        .document-icon.slides { background: linear-gradient(135deg, var(--monday-orange), var(--monday-yellow)); }
+        .document-icon.form { background: linear-gradient(135deg, var(--monday-purple), var(--monday-pink)); }
+        .document-icon.pdf { background: linear-gradient(135deg, var(--monday-red), var(--monday-orange)); }
+        .document-icon.image { background: linear-gradient(135deg, var(--monday-yellow), var(--monday-orange)); }
+        .document-icon.other { background: linear-gradient(135deg, var(--gray-500), var(--gray-600)); }
+
+        .document-info { 
+            flex: 1; 
+            min-width: 0; 
+        }
+
+        .document-title { 
+            font-size: 16px; 
+            font-weight: 600; 
+            color: var(--gray-800); 
+            margin-bottom: 4px; 
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            white-space: nowrap; 
+        }
+
+        .document-meta { 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+            font-size: 13px; 
+            color: var(--gray-500); 
+            flex-wrap: wrap; 
+        }
+
+        .document-category { 
+            background: var(--primary); 
+            color: white; 
+            padding: 4px 8px; 
+            border-radius: var(--radius-sm); 
+            font-size: 11px; 
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .document-description { 
+            font-size: 14px; 
+            color: var(--gray-600); 
+            margin-top: 12px; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 2; 
+            -webkit-box-orient: vertical; 
+            overflow: hidden; 
+            flex-grow: 1; 
+            line-height: 1.4;
+        }
+
+        .document-tags { 
+            display: flex; 
+            gap: 6px; 
+            flex-wrap: wrap; 
+            margin-top: 16px; 
+        }
+
+        .tag { 
+            background: var(--gray-100); 
+            color: var(--gray-600); 
+            padding: 4px 8px; 
+            border-radius: var(--radius-sm); 
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .document-actions { 
+            display: flex; 
+            gap: 8px; 
+            margin-top: 16px; 
+            padding-top: 16px; 
+            border-top: 1px solid var(--gray-100); 
+        }
+
+        .icon-btn { 
+            width: 36px; 
+            height: 36px; 
+            border: none; 
+            border-radius: var(--radius-md); 
+            background: transparent; 
+            cursor: pointer; 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: var(--transition); 
+            color: var(--gray-400);
+        }
+
+        .icon-btn:hover { 
+            background: var(--gray-100); 
+            color: var(--gray-600); 
+            transform: translateY(-1px);
+        }
+
+        .icon-btn svg { 
+            width: 18px; 
+            height: 18px; 
+        }
+
+        /* Table View */
+        .document-table {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+        }
+
+        .table-header {
+            background: var(--gray-50);
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--gray-200);
+            display: grid;
+            grid-template-columns: 48px 1fr 120px 140px 120px 100px;
+            gap: 16px;
+            align-items: center;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-row {
+            padding: 16px 24px;
+            border-bottom: 1px solid var(--gray-100);
+            display: grid;
+            grid-template-columns: 48px 1fr 120px 140px 120px 100px;
+            gap: 16px;
+            align-items: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .table-row:hover {
+            background: var(--gray-50);
+        }
+
+        .table-row:last-child {
+            border-bottom: none;
+        }
+
+        /* Category Cards */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .category-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            box-shadow: var(--shadow-xs);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--monday-blue), var(--monday-purple));
+        }
+
+        .category-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-lg);
+            transform: translateY(-6px);
+        }
+
+        .category-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+            line-height: 1;
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .category-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 8px;
+        }
+
+        .category-doc-count {
+            font-size: 14px;
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* Activity Feed */
+        .activity-section { 
+            background: var(--white); 
+            border: 1px solid var(--gray-200); 
+            border-radius: var(--radius-lg); 
+            padding: 24px; 
+            margin-top: 32px;
+            box-shadow: var(--shadow-xs);
+        }
+
+        .section-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 20px; 
+        }
+
+        .section-title { 
+            font-size: 18px; 
+            font-weight: 600; 
+            color: var(--gray-800); 
+            display: flex; 
+            align-items: center; 
+            gap: 8px; 
+        }
+
+        .activity-list { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+
+        .activity-item { 
+            display: flex; 
+            align-items: center; 
+            gap: 16px; 
+            padding: 16px; 
+            border-radius: var(--radius-md); 
+            background: var(--gray-50);
+            transition: var(--transition);
+        }
+
+        .activity-item:hover {
+            background: var(--gray-100);
+        }
+
+        .activity-avatar { 
+            width: 40px; 
+            height: 40px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple)); 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 16px; 
+            flex-shrink: 0;
+            font-weight: 600;
+        }
+
+        .activity-content { 
+            flex: 1; 
+            min-width: 0; 
+        }
+
+        .activity-text { 
+            font-size: 14px; 
+            color: var(--gray-700);
+            font-weight: 500;
+        }
+
+        .activity-text strong { 
+            color: var(--gray-800); 
+            font-weight: 600; 
+        }
+
+        .activity-time { 
+            font-size: 12px; 
+            color: var(--gray-400); 
+            margin-top: 2px;
+            font-weight: 500;
+        }
+        
+        /* Enhanced Scrollable Modals */
+        .modal-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(0, 0, 0, 0.4); 
+            display: flex; 
+            align-items: flex-start; 
+            justify-content: center; 
+            z-index: 1000; 
+            padding: 20px; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            backdrop-filter: blur(4px);
+            overflow-y: auto;
+        }
+
+        .modal-overlay.show { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        .modal { 
+            background: var(--white); 
+            border-radius: var(--radius-xl); 
+            width: 100%; 
+            max-width: 500px; 
+            min-height: auto;
+            max-height: calc(100vh - 40px);
+            margin: auto;
+            display: flex; 
+            flex-direction: column; 
+            transform: scale(0.95); 
+            transition: transform 0.3s ease; 
+            box-shadow: var(--shadow-xl);
+            position: relative;
+        }
+
+        .modal-overlay.show .modal { 
+            transform: scale(1); 
+        }
+
+        .modal-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            padding: 24px; 
+            border-bottom: 1px solid var(--gray-200); 
+            flex-shrink: 0;
+            background: var(--white);
+            border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        .modal-title { 
+            font-size: 20px; 
+            font-weight: 600; 
+            color: var(--gray-800); 
+        }
+
+        .modal-close { 
+            width: 36px; 
+            height: 36px; 
+            border: none; 
+            background: transparent; 
+            cursor: pointer; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            border-radius: var(--radius-md); 
+            color: var(--gray-400); 
+            font-size: 20px; 
+            transition: var(--transition); 
+        }
+
+        .modal-close:hover { 
+            background: var(--gray-100); 
+            color: var(--gray-600); 
+        }
+
+        .modal-body { 
+            padding: 24px; 
+            overflow-y: auto; 
+            flex: 1; 
+            min-height: 0;
+            max-height: calc(100vh - 200px);
+            scrollbar-width: thin;
+            scrollbar-color: var(--gray-300) var(--gray-100);
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: var(--gray-100);
+            border-radius: var(--radius-sm);
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: var(--gray-300);
+            border-radius: var(--radius-sm);
+        }
+
+        .modal-body::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-400);
+        }
+
+        .modal-scroll-indicator {
+            position: absolute;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--primary);
+            color: white;
+            padding: 8px 16px;
+            border-radius: var(--radius-xl);
+            font-size: 12px;
+            font-weight: 500;
+            pointer-events: none;
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .modal-scroll-indicator.show {
+            opacity: 1;
+        }
+
+        .modal-scroll-indicator::before {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 6px solid transparent;
+            border-top-color: var(--primary);
+        }
+
+        .modal-footer { 
+            display: flex; 
+            gap: 12px; 
+            justify-content: flex-end; 
+            padding: 24px; 
+            border-top: 1px solid var(--gray-200); 
+            background: var(--gray-50);
+            flex-shrink: 0;
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+            position: sticky;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        /* Forms */
+        .form-group { 
+            margin-bottom: 20px; 
+        }
+
+        .form-label { 
+            display: block; 
+            font-size: 14px; 
+            font-weight: 600; 
+            color: var(--gray-700); 
+            margin-bottom: 8px; 
+        }
+
+        .form-label.required::after { 
+            content: " *"; 
+            color: var(--danger); 
+        }
+
+        .form-input, .form-select, .form-textarea { 
+            width: 100%; 
+            padding: 12px 16px; 
+            border: 2px solid var(--gray-200); 
+            border-radius: var(--radius-md); 
+            font-size: 14px; 
+            transition: var(--transition); 
+            background: var(--white);
+            font-family: inherit;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus { 
+            outline: none; 
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 3px rgba(0, 115, 234, 0.1); 
+        }
+
+        .form-textarea { 
+            min-height: 100px; 
+            resize: vertical; 
+        }
+
+        .form-help { 
+            font-size: 13px; 
+            color: var(--gray-500); 
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .form-help a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-help a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Toast Notifications */
+        .toast-container { 
+            position: fixed; 
+            top: 80px; 
+            right: 20px; 
+            z-index: 1100; 
+            pointer-events: none; 
+        }
+
+        .toast { 
+            background: var(--white); 
+            border-radius: var(--radius-lg); 
+            padding: 16px 20px; 
+            margin-bottom: 12px; 
+            box-shadow: var(--shadow-lg); 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+            min-width: 320px; 
+            max-width: 400px; 
+            pointer-events: auto; 
+            animation: slideIn 0.3s ease; 
+            border-left: 4px solid;
+        }
+
+        @keyframes slideIn { 
+            from { 
+                transform: translateX(100%); 
+                opacity: 0; 
+            } 
+            to { 
+                transform: translateX(0); 
+                opacity: 1; 
+            } 
+        }
+
+        .toast.success { 
+            border-color: var(--success); 
+        } 
+
+        .toast.error { 
+            border-color: var(--danger); 
+        } 
+
+        .toast.info { 
+            border-color: var(--primary); 
+        } 
+
+        .toast.warning { 
+            border-color: var(--warning); 
+        }
+
+        .toast-icon { 
+            width: 24px; 
+            height: 24px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-size: 14px; 
+            flex-shrink: 0; 
+            border-radius: 50%;
+            font-weight: 600;
+        }
+
+        .toast.success .toast-icon { 
+            background: var(--success); 
+        } 
+
+        .toast.error .toast-icon { 
+            background: var(--danger); 
+        } 
+
+        .toast.info .toast-icon { 
+            background: var(--primary); 
+        } 
+
+        .toast.warning .toast-icon { 
+            background: var(--warning); 
+        }
+
+        .toast-message { 
+            flex: 1; 
+            font-size: 14px; 
+            font-weight: 500; 
+            color: var(--gray-700); 
+        }
+
+        .toast-close { 
+            cursor: pointer; 
+            color: var(--gray-400); 
+            font-size: 18px; 
+            padding: 4px;
+            font-weight: 600;
+        }
+        
+        /* Loading */
+        .loading-overlay { 
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: rgba(255, 255, 255, 0.9); 
+            backdrop-filter: blur(4px); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            z-index: 2000; 
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.3s ease, visibility 0.3s ease; 
+        }
+
+        .loading-overlay.show { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        .loading-spinner { 
+            width: 48px; 
+            height: 48px; 
+            border: 4px solid var(--gray-200); 
+            border-top-color: var(--primary); 
+            border-radius: 50%; 
+            animation: spin 0.8s linear infinite; 
+        }
+
+        @keyframes spin { 
+            to { 
+                transform: rotate(360deg); 
+            } 
+        }
+
+        /* Empty State */
+        .empty-state { 
+            text-align: center; 
+            padding: 64px; 
+            background: var(--white); 
+            border-radius: var(--radius-lg); 
+            border: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-xs);
+        }
+
+        .empty-icon { 
+            font-size: 64px; 
+            margin-bottom: 24px; 
+            opacity: 0.5; 
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .empty-title { 
+            font-size: 20px; 
+            font-weight: 600; 
+            color: var(--gray-800); 
+            margin-bottom: 8px; 
+        }
+
+        .empty-description { 
+            font-size: 15px; 
+            margin-bottom: 24px; 
+            color: var(--gray-500);
+            font-weight: 500;
+        }
+
+        /* Highlight */
+        .highlight { 
+            background: var(--monday-yellow); 
+            padding: 2px 4px; 
+            border-radius: var(--radius-sm); 
+            font-weight: 600;
+            color: var(--gray-800);
+        }
+
+        /* FAB */
+        .fab { 
+            position: fixed; 
+            bottom: 32px; 
+            right: 32px; 
+            width: 64px; 
+            height: 64px; 
+            border-radius: 50%; 
+            background: linear-gradient(135deg, var(--monday-blue), var(--monday-purple)); 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            box-shadow: var(--shadow-lg); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 24px; 
+            transition: var(--transition); 
+            z-index: 100;
+            font-weight: 600;
+        }
+
+        .fab:hover { 
+            transform: scale(1.1); 
+            box-shadow: var(--shadow-xl);
+        }
+
+        .fab:active {
+            transform: scale(1.05);
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 4px 8px;
+            border-radius: var(--radius-xl);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-indicator.active {
+            background: rgba(0, 202, 114, 0.1);
+            color: var(--success);
+        }
+
+        .status-indicator.archived {
+            background: rgba(103, 104, 121, 0.1);
+            color: var(--gray-500);
+        }
+
+        .status-indicator.urgent {
+            background: rgba(226, 68, 92, 0.1);
+            color: var(--danger);
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-btn { 
+                display: block; 
+            }
+
+            .logo span { 
+                display: none; 
+            }
+
+            .online-users { 
+                display: none; 
+            }
+
+            .nav-tabs {
+                display: none;
+            }
+
+            .sidebar.show {
+                width: 100%;
+            }
+
+            .main-content.with-sidebar {
+                margin-left: 0;
+            }
+
+            .content-body { 
+                padding: 16px; 
+            }
+
+            .document-grid, .category-grid { 
+                grid-template-columns: 1fr; 
+                gap: 16px; 
+            }
+
+            .fab { 
+                bottom: 24px; 
+                right: 24px; 
+                width: 56px; 
+                height: 56px; 
+                font-size: 20px; 
+            }
+
+            .content-header {
+                padding: 16px;
+                flex-direction: column;
+                align-items: stretch;
+                gap: 16px;
+            }
+
+            .content-actions {
+                justify-content: stretch;
+            }
+
+            .modal { 
+                max-width: calc(100vw - 20px);
+                max-height: calc(100vh - 20px);
+                margin: 10px auto;
+            }
+
+            .modal-header {
+                padding: 20px;
+            }
+
+            .modal-body { 
+                padding: 20px;
+                max-height: calc(100vh - 140px);
+            }
+
+            .modal-footer {
+                padding: 20px;
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .modal-footer .btn {
+                width: 100%;
+            }
+
+            .content-actions .btn {
+                flex: 1;
+            }
+
+            .search-page {
+                padding: 20px;
+            }
+
+            .search-logo {
+                font-size: 48px;
+                margin-bottom: 24px;
+            }
+
+            .search-input-main {
+                height: 48px;
+                font-size: 16px;
+                padding: 0 100px 0 48px;
+            }
+
+            .search-btn-main {
+                height: 32px;
+                padding: 0 16px;
+                font-size: 12px;
+                right: 8px;
+            }
+
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
+            }
+
+            .search-content-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+                margin-top: 24px;
+            }
+
+            .search-section {
+                padding: 16px;
+            }
+
+            .search-section .section-header {
+                margin-bottom: 16px;
+            }
+
+            .search-section .section-title {
+                font-size: 14px;
+            }
+
+            .search-document-item,
+            .search-category-item,
+            .quick-action-btn,
+            .search-activity-item {
+                padding: 8px;
+            }
+
+            .search-document-title,
+            .search-category-name,
+            .quick-action-title {
+                font-size: 13px;
+            }
+
+            .search-document-meta,
+            .search-category-count,
+            .quick-action-desc,
+            .search-activity-text {
+                font-size: 11px;
+            }
+
+            .quick-actions-list {
+                gap: 4px;
+            }
+
+            .table-header,
+            .table-row {
+                grid-template-columns: 40px 1fr 80px 100px;
+                gap: 8px;
+                font-size: 12px;
+            }
+
+            .table-header .hide-mobile,
+            .table-row .hide-mobile {
+                display: none;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        .hide-mobile {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hide-mobile {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <div class="app-container">
+        <header class="header">
+            <button class="mobile-menu-btn" onclick="toggleSidebar()">☰</button>
+            <div class="logo">
+                <span class="logo-icon">📋</span>
+                <span>DocCenter</span>
+            </div>
+            
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-page="search">🔍 Search</button>
+                <button class="nav-tab" data-page="categories">📁 Categories</button>
+                <button class="nav-tab" data-page="documents">📄 All Documents</button>
+            </div>
+
+            <div class="online-users" id="onlineUsers"></div>
+            <button class="btn btn-primary" onclick="showAddDocumentModal()">
+                <span>+</span>
+                <span>Add Document</span>
+            </button>
+        </header>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2 class="sidebar-title">Filters</h2>
+                <button class="btn btn-ghost" onclick="clearAllFilters()">Clear All</button>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">
+                    <span>📂</span>
+                    Categories
+                </div>
+                <div class="filter-list" id="categoriesFilter"></div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">
+                    <span>📎</span>
+                    File Types
+                </div>
+                <div class="filter-list" id="fileTypesFilter"></div>
+            </div>
+
+            <div class="filter-section">
+                <div class="filter-title">
+                    <span>🔄</span>
+                    Status
+                </div>
+                <div class="filter-list">
+                    <div class="filter-item active" data-filter="status" data-value="Active">
+                        <input type="checkbox" class="filter-checkbox" checked>
+                        <span class="filter-label">Active</span>
+                        <span class="filter-count" id="activeCount">0</span>
+                    </div>
+                    <div class="filter-item" data-filter="status" data-value="Archived">
+                        <input type="checkbox" class="filter-checkbox">
+                        <span class="filter-label">Archived</span>
+                        <span class="filter-count" id="archivedCount">0</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content" id="mainContent">
+            <div id="contentBody"></div>
+        </main>
+    </div>
+
+    <button class="fab" onclick="showAddDocumentModal()" title="Add Document">+</button>
+
+    <!-- Add Document Modal -->
+    <div class="modal-overlay" id="addDocumentModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Add New Document</h2>
+                <button class="modal-close" onclick="closeModal('addDocumentModal')">✕</button>
+            </div>
+            <form id="addDocumentForm" onsubmit="handleAddDocument(event)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label class="form-label required">Document Name</label>
+                        <input type="text" class="form-input" id="docName" required placeholder="Enter document name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Google Drive URL</label>
+                        <input type="url" class="form-input" id="docUrl" required placeholder="https://docs.google.com/...">
+                        <div class="form-help">Paste the sharing link from Google Drive</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" id="docDescription" placeholder="Brief description of the document"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Category</label>
+                        <select class="form-select" id="docCategory" required>
+                            <option value="">Select a category</option>
+                        </select>
+                        <div class="form-help">
+                            <a href="#" onclick="showNewCategoryInput(event)">+ Create new category</a>
+                        </div>
+                    </div>
+                    <div class="form-group hidden" id="newCategoryGroup">
+                        <label class="form-label">New Category Name</label>
+                        <input type="text" class="form-input" id="newCategoryName" placeholder="Enter new category name">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <input type="text" class="form-input" id="docTags" placeholder="Enter tags separated by commas">
+                        <div class="form-help">Example: urgent, template, process</div>
+                    </div>
+                </div>
+                <div class="modal-scroll-indicator" id="addModalScrollIndicator">
+                    ↓ Scroll to see more ↓
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('addDocumentModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">
+                        💾 Add Document
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Document Modal -->
+    <div class="modal-overlay" id="editDocumentModal">
+        <div class="modal">
+            <div class="modal-header">
+                <h2 class="modal-title">Edit Document</h2>
+                <button class="modal-close" onclick="closeModal('editDocumentModal')">✕</button>
+            </div>
+            <form id="editDocumentForm" onsubmit="handleEditDocument(event)">
+                <div class="modal-body">
+                    <input type="hidden" id="editDocId">
+                    <div class="form-group">
+                        <label class="form-label required">Document Name</label>
+                        <input type="text" class="form-input" id="editDocName" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Google Drive URL</label>
+                        <input type="url" class="form-input" id="editDocUrl" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Description</label>
+                        <textarea class="form-textarea" id="editDocDescription"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label required">Category</label>
+                        <select class="form-select" id="editDocCategory" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Tags</label>
+                        <input type="text" class="form-input" id="editDocTags">
+                    </div>
+                </div>
+                <div class="modal-scroll-indicator" id="editModalScrollIndicator">
+                    ↓ Scroll to see more ↓
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('editDocumentModal')">Cancel</button>
+                    <button type="submit" class="btn btn-success">
+                        💾 Save Changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        // Global State - Using only Google Sheets data
+        let state = {
+            user: null, 
+            documents: [], 
+            categories: [], 
+            tags: [], 
+            onlineUsers: [], 
+            recentActivity: [],
+            currentPage: 'search', // Default to search page
+            currentView: 'cards', // cards or table
+            filters: { 
+                search: '', 
+                categories: [], 
+                fileTypes: [], 
+                status: ['Active'] 
+            },
+            lastCategoryUsed: '',
+            analytics: {}
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', initializeApp);
+
+        async function initializeApp() {
+            try {
+                showLoading();
+                setupEventListeners();
+                const data = await callBackend('getInitialData');
+                if (data && data.success) {
+                    // Only use real data from Google Sheets
+                    state.user = data.user;
+                    state.documents = data.documents || [];
+                    state.categories = data.categories || [];
+                    state.tags = data.tags || [];
+                    state.onlineUsers = data.onlineUsers || [];
+                    state.recentActivity = data.recentActivity || [];
+                    state.analytics = data.analytics || {};
+                    
+                    renderApp();
+                    startHeartbeat();
+                    showToast(`Welcome back, ${state.user.name}! 🎉`, 'success');
+                } else {
+                    throw new Error(data ? data.error : 'Failed to retrieve initial data.');
+                }
+            } catch (error) {
+                console.error('CLIENT: Initialization error:', error);
+                showError('Failed to load application. Please check console for details.');
+            } finally {
+                hideLoading();
+            }
+        }
+
+        // Backend Communication
+        async function callBackend(functionName, ...args) {
+            return new Promise((resolve) => {
+                google.script.run
+                    .withSuccessHandler(response => {
+                        try {
+                            resolve(JSON.parse(response));
+                        } catch (e) {
+                            console.error(`CLIENT: Failed to parse JSON from ${functionName}`, e, "Response:", response);
+                            resolve({ success: false, error: 'Invalid JSON response from server.' });
+                        }
+                    })
+                    .withFailureHandler(error => {
+                        console.error(`CLIENT: Failure from ${functionName}`, error);
+                        resolve({ success: false, error: error.message || 'Unknown server error' });
+                    })
+                    [functionName](...args);
+            });
+        }
+
+        // Enhanced Event Listeners
+        function setupEventListeners() {
+            // Navigation tabs and filters
+            document.addEventListener('click', (e) => {
+                if (e.target.matches('.nav-tab')) {
+                    handlePageNavigation(e.target.dataset.page);
+                }
+                if (e.target.matches('.view-btn')) {
+                    handleViewToggle(e.target.dataset.view);
+                }
+                
+                // Handle filter clicks (both on item and checkbox)
+                const filterItem = e.target.closest('.filter-item[data-filter]');
+                if (filterItem) {
+                    // Prevent default if clicking directly on checkbox
+                    if (e.target.matches('.filter-checkbox')) {
+                        e.preventDefault();
+                    }
+                    handleFilterClick(filterItem);
+                }
+                
+                // Close modal when clicking outside
+                if (e.target.matches('.modal-overlay')) {
+                    closeAllModals();
+                }
+            });
+
+            // Search input - Only trigger on Enter key or button click
+            document.addEventListener('keydown', (e) => {
+                if (e.target.matches('.search-input-main') && e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+                
+                // Global Keyboard Shortcuts
+                if ((e.ctrlKey || e.metaKey) && e.key === 'k') { 
+                    e.preventDefault(); 
+                    const searchInput = document.getElementById('mainSearchInput');
+                    if (searchInput) searchInput.focus();
+                }
+                if ((e.ctrlKey || e.metaKey) && e.key === 'n') { 
+                    e.preventDefault(); 
+                    showAddDocumentModal(); 
+                }
+                if (e.key === 'Escape') closeAllModals();
+            });
+        }
+
+        // Render Functions
+        function renderApp() {
+            updateNavTabs();
+            updateSidebar();
+            renderCurrentPage();
+            renderOnlineUsers();
+        }
+
+        function updateNavTabs() {
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.toggle('active', tab.dataset.page === state.currentPage);
+            });
+        }
+
+        function updateSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            
+            if (state.currentPage === 'documents') {
+                sidebar.classList.add('show');
+                mainContent.classList.add('with-sidebar');
+                renderFilters();
+            } else {
+                sidebar.classList.remove('show');
+                mainContent.classList.remove('with-sidebar');
+            }
+            
+            // Update filter indicators
+            updateFilterIndicators();
+        }
+
+        function updateFilterIndicators() {
+            const totalActiveFilters = state.filters.categories.length + 
+                                     state.filters.fileTypes.length + 
+                                     (state.filters.search ? 1 : 0);
+            
+            // Update clear button text to show active filter count
+            const clearBtn = document.querySelector('.sidebar-header .btn');
+            if (clearBtn && totalActiveFilters > 0) {
+                clearBtn.textContent = `Clear (${totalActiveFilters})`;
+                clearBtn.style.background = 'var(--primary)';
+                clearBtn.style.color = 'white';
+            } else if (clearBtn) {
+                clearBtn.textContent = 'Clear All';
+                clearBtn.style.background = '';
+                clearBtn.style.color = '';
+            }
+        }
+
+        function renderFilters() {
+            // Categories filter
+            const categoriesHtml = state.categories.map(cat => {
+                const isActive = state.filters.categories.includes(cat.CategoryName);
+                const count = state.documents.filter(d => d.Category === cat.CategoryName).length;
+                return `
+                    <div class="filter-item ${isActive ? 'active' : ''}" data-filter="categories" data-value="${cat.CategoryName}">
+                        <input type="checkbox" class="filter-checkbox" ${isActive ? 'checked' : ''}>
+                        <span class="filter-label">${cat.CategoryName}</span>
+                        <span class="filter-count">${count}</span>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('categoriesFilter').innerHTML = categoriesHtml;
+
+            // File types filter
+            const fileTypes = [...new Set(state.documents.map(d => d.FileType))].sort();
+            const fileTypesHtml = fileTypes.map(type => {
+                const isActive = state.filters.fileTypes.includes(type);
+                const count = state.documents.filter(d => d.FileType === type).length;
+                return `
+                    <div class="filter-item ${isActive ? 'active' : ''}" data-filter="fileTypes" data-value="${type}">
+                        <input type="checkbox" class="filter-checkbox" ${isActive ? 'checked' : ''}>
+                        <span class="filter-label">${type}</span>
+                        <span class="filter-count">${count}</span>
+                    </div>
+                `;
+            }).join('');
+            document.getElementById('fileTypesFilter').innerHTML = fileTypesHtml;
+
+            // Update status filter counts and states
+            const activeCount = state.documents.filter(doc => doc.Status === 'Active').length;
+            const archivedCount = state.documents.filter(doc => doc.Status === 'Archived').length;
+            
+            document.getElementById('activeCount').textContent = activeCount;
+            document.getElementById('archivedCount').textContent = archivedCount;
+            
+            // Update status filter checkboxes
+            const activeStatusItem = document.querySelector('.filter-item[data-filter="status"][data-value="Active"]');
+            const archivedStatusItem = document.querySelector('.filter-item[data-filter="status"][data-value="Archived"]');
+            
+            if (activeStatusItem) {
+                const isActiveChecked = state.filters.status.includes('Active');
+                const activeCheckbox = activeStatusItem.querySelector('.filter-checkbox');
+                activeStatusItem.classList.toggle('active', isActiveChecked);
+                if (activeCheckbox) activeCheckbox.checked = isActiveChecked;
+            }
+            
+            if (archivedStatusItem) {
+                const isArchivedChecked = state.filters.status.includes('Archived');
+                const archivedCheckbox = archivedStatusItem.querySelector('.filter-checkbox');
+                archivedStatusItem.classList.toggle('active', isArchivedChecked);
+                if (archivedCheckbox) archivedCheckbox.checked = isArchivedChecked;
+            }
+
+            // Update category options in modals
+            const categoryOptions = state.categories.map(cat => `<option value="${cat.CategoryName}">${cat.CategoryName}</option>`).join('');
+            document.getElementById('docCategory').innerHTML = '<option value="">Select a category</option>' + categoryOptions;
+            document.getElementById('editDocCategory').innerHTML = '<option value="">Select a category</option>' + categoryOptions;
+        }
+
+        function renderCurrentPage() {
+            const contentBody = document.getElementById('contentBody');
+            
+            switch (state.currentPage) {
+                case 'search':
+                    renderSearchPage();
+                    break;
+                case 'categories':
+                    renderCategoriesPage();
+                    break;
+                case 'documents':
+                    renderDocumentsPage();
+                    break;
+                default:
+                    renderSearchPage();
+            }
+        }
+
+        function renderSearchPage() {
+            const totalDocs = state.documents.length;
+            const activeDocs = state.documents.filter(d => d.Status === 'Active').length;
+            const totalCategories = state.categories.length;
+            const totalViews = state.analytics.totalViews || 0;
+
+            // Get recent documents (last 6)
+            const recentDocs = [...state.documents]
+                .sort((a, b) => new Date(b.LastModified || b.DateAdded) - new Date(a.LastModified || a.DateAdded))
+                .slice(0, 6);
+
+            // Get popular categories (with most documents)
+            const popularCategories = [...state.categories]
+                .map(cat => ({
+                    ...cat,
+                    docCount: state.documents.filter(d => d.Category === cat.CategoryName && d.Status === 'Active').length
+                }))
+                .sort((a, b) => b.docCount - a.docCount)
+                .slice(0, 8);
+
+            const searchPageHtml = `
+                <div class="search-page">
+                    <div class="search-logo">📋</div>
+                    
+                    <div class="search-container-main">
+                        <div class="search-wrapper-main">
+                            <svg class="search-icon-main" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"></path>
+                            </svg>
+                            <input type="text" class="search-input-main" placeholder="Search documents, categories, people..." autocomplete="off" id="mainSearchInput">
+                            <button class="search-btn-main" onclick="performSearch()">Search</button>
+                        </div>
+                    </div>
+
+                    <div class="search-suggestions">
+                        ${popularCategories.slice(0, 6).map(cat => `
+                            <button class="search-suggestion" onclick="searchByCategory('${cat.CategoryName}')">${cat.CategoryName} (${cat.docCount})</button>
+                        `).join('')}
+                    </div>
+
+                    <div class="quick-stats">
+                        <div class="quick-stat" onclick="handlePageNavigation('documents')">
+                            <div class="quick-stat-icon">📄</div>
+                            <div class="quick-stat-value">${totalDocs}</div>
+                            <div class="quick-stat-label">Total Documents</div>
+                        </div>
+                        <div class="quick-stat" onclick="handlePageNavigation('categories')">
+                            <div class="quick-stat-icon">📁</div>
+                            <div class="quick-stat-value">${totalCategories}</div>
+                            <div class="quick-stat-label">Categories</div>
+                        </div>
+                        <div class="quick-stat">
+                            <div class="quick-stat-icon">✅</div>
+                            <div class="quick-stat-value">${activeDocs}</div>
+                            <div class="quick-stat-label">Active Documents</div>
+                        </div>
+                        <div class="quick-stat">
+                            <div class="quick-stat-icon">👥</div>
+                            <div class="quick-stat-value">${state.onlineUsers.length}</div>
+                            <div class="quick-stat-label">Online Users</div>
+                        </div>
+                    </div>
+
+                    <div class="search-content-grid">
+                        <!-- Recent Documents Section -->
+                        <div class="search-section">
+                            <div class="section-header">
+                                <div class="section-title">📚 Recent Documents</div>
+                                <button class="btn btn-ghost" onclick="handlePageNavigation('documents')">View All</button>
+                            </div>
+                            <div class="search-document-list">
+                                ${recentDocs.length > 0 ? recentDocs.map(doc => `
+                                    <div class="search-document-item" onclick="openDocument('${doc.DocID}')">
+                                        <div class="document-icon ${getFileTypeClass(doc.FileType)}" style="width: 32px; height: 32px; font-size: 16px;">
+                                            ${getFileTypeIcon(doc.FileType)}
+                                        </div>
+                                        <div class="search-document-info">
+                                            <div class="search-document-title">${doc.DocumentName}</div>
+                                            <div class="search-document-meta">
+                                                <span class="document-category">${doc.Category}</span>
+                                                <span>${formatDate(doc.DateAdded)}</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `).join('') : '<div class="empty-message">No recent documents</div>'}
+                            </div>
+                        </div>
+
+                        <!-- All Categories Section -->
+                        <div class="search-section">
+                            <div class="section-header">
+                                <div class="section-title">📂 All Categories</div>
+                                <button class="btn btn-ghost" onclick="handlePageNavigation('categories')">View Grid</button>
+                            </div>
+                            <div class="search-category-list">
+                                ${popularCategories.map(cat => `
+                                    <div class="search-category-item" onclick="viewCategoryDocuments('${cat.CategoryName}')">
+                                        <div class="search-category-icon">${getCategoryIcon(cat.CategoryName)}</div>
+                                        <div class="search-category-info">
+                                            <div class="search-category-name">${cat.CategoryName}</div>
+                                            <div class="search-category-count">${cat.docCount} documents</div>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions Section -->
+                        <div class="search-section">
+                            <div class="section-header">
+                                <div class="section-title">⚡ Quick Actions</div>
+                            </div>
+                            <div class="quick-actions-list">
+                                <button class="quick-action-btn" onclick="showAddDocumentModal()">
+                                    <div class="quick-action-icon" style="background: var(--success);">➕</div>
+                                    <div class="quick-action-text">
+                                        <div class="quick-action-title">Add Document</div>
+                                        <div class="quick-action-desc">Upload a new document</div>
+                                    </div>
+                                </button>
+                                <button class="quick-action-btn" onclick="handlePageNavigation('documents')">
+                                    <div class="quick-action-icon" style="background: var(--primary);">📄</div>
+                                    <div class="quick-action-text">
+                                        <div class="quick-action-title">Browse All</div>
+                                        <div class="quick-action-desc">View all documents</div>
+                                    </div>
+                                </button>
+                                <button class="quick-action-btn" onclick="searchByFilter()">
+                                    <div class="quick-action-icon" style="background: var(--warning);">🔍</div>
+                                    <div class="quick-action-text">
+                                        <div class="quick-action-title">Advanced Search</div>
+                                        <div class="quick-action-desc">Filter by type & status</div>
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity Section -->
+                        ${state.recentActivity.length > 0 ? `
+                            <div class="search-section">
+                                <div class="section-header">
+                                    <div class="section-title">📈 Recent Activity</div>
+                                </div>
+                                <div class="search-activity-list">
+                                    ${state.recentActivity.slice(0, 5).map(activity => `
+                                        <div class="search-activity-item">
+                                            <div class="activity-avatar" style="width: 32px; height: 32px; font-size: 14px;">${getAvatar(activity.UserEmail)}</div>
+                                            <div class="search-activity-content">
+                                                <div class="search-activity-text">
+                                                    <strong>${activity.UserName}</strong> ${activity.Action.toLowerCase()}
+                                                </div>
+                                                <div class="search-activity-time">${formatRelativeTime(activity.Timestamp)}</div>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+
+            document.getElementById('contentBody').innerHTML = searchPageHtml;
+        }
+
+        function renderCategoriesPage() {
+            const categoriesHtml = state.categories.map(cat => {
+                const count = state.documents.filter(doc => doc.Category === cat.CategoryName && doc.Status === 'Active').length;
+                return `
+                    <div class="category-card" onclick="viewCategoryDocuments('${cat.CategoryName}')">
+                        <div class="category-icon">${getCategoryIcon(cat.CategoryName)}</div>
+                        <h3 class="category-title">${cat.CategoryName}</h3>
+                        <p class="category-doc-count">${count} documents</p>
+                    </div>
+                `;
+            }).join('');
+            
+            const contentHtml = `
+                <div class="content-header">
+                    <div>
+                        <h1 class="content-title">Categories</h1>
+                        <p class="content-subtitle">Browse documents by category</p>
+                    </div>
+                </div>
+                <div class="content-body">
+                    <div class="category-grid">${categoriesHtml}</div>
+                </div>
+            `;
+
+            document.getElementById('contentBody').innerHTML = contentHtml;
+        }
+
+        function renderDocumentsPage() {
+            const filteredDocs = getFilteredDocuments();
+            
+            const contentHtml = `
+                <div class="content-header">
+                    <div>
+                        <h1 class="content-title">Documents</h1>
+                        <p class="content-subtitle">Found ${filteredDocs.length} documents</p>
+                    </div>
+                    <div class="content-actions">
+                        <div class="view-toggle">
+                            <button class="view-btn ${state.currentView === 'cards' ? 'active' : ''}" data-view="cards">Cards</button>
+                            <button class="view-btn ${state.currentView === 'table' ? 'active' : ''}" data-view="table">Table</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-body">
+                    ${filteredDocs.length === 0 ? renderEmptyState() : renderDocuments(filteredDocs)}
+                </div>
+            `;
+
+            document.getElementById('contentBody').innerHTML = contentHtml;
+        }
+
+        function renderDocuments(docs) {
+            if (state.currentView === 'table') {
+                return renderTableView(docs);
+            } else {
+                return renderCardView(docs);
+            }
+        }
+
+        function renderCardView(docs) {
+            const documentsHtml = docs.map(doc => renderDocumentCard(doc)).join('');
+            return `<div class="document-grid">${documentsHtml}</div>`;
+        }
+
+        function renderTableView(docs) {
+            const tableHtml = `
+                <div class="document-table">
+                    <div class="table-header">
+                        <div></div>
+                        <div>Name</div>
+                        <div>Category</div>
+                        <div class="hide-mobile">Date Added</div>
+                        <div class="hide-mobile">Owner</div>
+                        <div>Status</div>
+                    </div>
+                    ${docs.map(doc => `
+                        <div class="table-row" onclick="openDocument('${doc.DocID}')">
+                            <div class="document-icon ${getFileTypeClass(doc.FileType)}" style="width: 32px; height: 32px; font-size: 16px;">
+                                ${getFileTypeIcon(doc.FileType)}
+                            </div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 4px;">${highlightText(doc.DocumentName)}</div>
+                                <div style="font-size: 12px; color: var(--gray-500);">${doc.Description || 'No description'}</div>
+                            </div>
+                            <div class="document-category">${doc.Category}</div>
+                            <div class="hide-mobile" style="font-size: 13px; color: var(--gray-500);">${formatDate(doc.DateAdded)}</div>
+                            <div class="hide-mobile" style="font-size: 13px; color: var(--gray-500);">${getDisplayName(doc.SharedBy)}</div>
+                            <div>
+                                <div class="status-indicator ${doc.Status.toLowerCase()}">
+                                    <span class="status-dot"></span>
+                                    ${doc.Status}
+                                </div>
+                            </div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+            return tableHtml;
+        }
+
+        function renderEmptyState() {
+            return `
+                <div class="empty-state">
+                    <div class="empty-icon">📄</div>
+                    <div class="empty-title">No documents found</div>
+                    <div class="empty-description">
+                        ${state.filters.search ? 'Try adjusting your search or filters.' : 'Add a new document to get started.'}
+                    </div>
+                    ${!state.filters.search ? '<button class="btn btn-primary" onclick="showAddDocumentModal()">+ Add Document</button>' : ''}
+                </div>
+            `;
+        }
+
+        function renderDocumentCard(doc) {
+            const statusClass = doc.Status.toLowerCase();
+            
+            return `
+                <div class="document-card" onclick="openDocument('${doc.DocID}')">
+                    <div class="document-header">
+                        <div class="document-icon ${getFileTypeClass(doc.FileType)}">
+                            ${getFileTypeIcon(doc.FileType)}
+                        </div>
+                        <div class="document-info">
+                            <h3 class="document-title">${highlightText(doc.DocumentName)}</h3>
+                            <div class="document-meta">
+                                <span class="document-category">${doc.Category}</span>
+                                <span class="status-indicator ${statusClass}">
+                                    <span class="status-dot"></span>
+                                    ${doc.Status}
+                                </span>
+                                <span>${getDisplayName(doc.SharedBy)}</span>
+                                <span>${formatDate(doc.DateAdded)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="document-description">${highlightText(doc.Description)}</p>
+                    
+                    ${doc.Tags ? `
+                        <div class="document-tags">
+                            ${doc.Tags.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                    
+                    <div class="document-actions">
+                        <button class="icon-btn" onclick="event.stopPropagation(); openDocument('${doc.DocID}')" title="Open">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+                            </svg>
+                        </button>
+                        <button class="icon-btn" onclick="event.stopPropagation(); showEditModal('${doc.DocID}')" title="Edit">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
+                            </svg>
+                        </button>
+                        <button class="icon-btn" onclick="event.stopPropagation(); archiveDocument('${doc.DocID}')" title="Archive">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.75 7.5h16.5" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderActivityItem(activity) { 
+            return `
+                <div class="activity-item">
+                    <div class="activity-avatar">${getAvatar(activity.UserEmail)}</div>
+                    <div class="activity-content">
+                        <div class="activity-text">
+                            <strong>${activity.UserName}</strong> ${activity.Action.toLowerCase()} ${activity.Details}
+                        </div>
+                        <div class="activity-time">${formatRelativeTime(activity.Timestamp)}</div>
+                    </div>
+                </div>
+            `; 
+        }
+
+        function renderOnlineUsers() {
+            const container = document.getElementById('onlineUsers'); 
+            if (!container) return;
+            
+            const usersHtml = state.onlineUsers.slice(0, 5).map(user => `
+                <div class="online-user" title="${user.name} - ${user.status}">
+                    ${user.avatar}
+                </div>
+            `).join('');
+            
+            const countHtml = state.onlineUsers.length > 5 ? 
+                `<div class="online-count">+${state.onlineUsers.length - 5}</div>` : '';
+            
+            container.innerHTML = usersHtml + countHtml;
+        }
+
+        // Action Handlers
+        function handlePageNavigation(page) { 
+            state.currentPage = page; 
+            renderApp(); 
+        }
+
+        function handleViewToggle(view) {
+            state.currentView = view;
+            renderCurrentPage();
+        }
+
+        function handleMainSearch(searchTerm) {
+            if (searchTerm && searchTerm.trim()) {
+                state.filters.search = searchTerm.trim();
+                handlePageNavigation('documents');
+            }
+        }
+
+        function searchByFilter() {
+            // Navigate to documents page with filters visible
+            handlePageNavigation('documents');
+        }
+
+        function performSearch() {
+            const searchInput = document.getElementById('mainSearchInput');
+            if (searchInput) {
+                handleMainSearch(searchInput.value);
+            }
+        }
+
+        function searchByCategory(categoryName) {
+            clearAllFilters(false);
+            state.filters.categories = [categoryName];
+            state.filters.search = '';
+            handlePageNavigation('documents');
+        }
+
+        function viewCategoryDocuments(categoryName) { 
+            clearAllFilters(false);
+            state.filters.categories = [categoryName]; 
+            handlePageNavigation('documents');
+        }
+
+        function handleFilterClick(element) {
+            const { filter, value } = element.dataset;
+            const filterArray = state.filters[filter];
+            const index = filterArray.indexOf(value);
+            const checkbox = element.querySelector('.filter-checkbox');
+            
+            if (index > -1) {
+                // Remove filter
+                filterArray.splice(index, 1);
+                element.classList.remove('active');
+                if (checkbox) checkbox.checked = false;
+            } else {
+                // Add filter
+                filterArray.push(value);
+                element.classList.add('active');
+                if (checkbox) checkbox.checked = true;
+            }
+            
+            // Update filter counts and re-render
+            renderFilters();
+            updateFilterIndicators();
+            renderCurrentPage();
+        }
+
+        async function handleAddDocument(e) {
+            e.preventDefault(); 
+            showLoading();
+            
+            let category = document.getElementById('docCategory').value;
+            const newCategoryName = document.getElementById('newCategoryName').value.trim();
+            
+            if (newCategoryName) {
+                const result = await callBackend('addCategory', newCategoryName);
+                if (result.success) { 
+                    category = newCategoryName; 
+                    state.categories.push({ CategoryName: newCategoryName }); 
+                } else { 
+                    showToast(result.error, 'error'); 
+                    hideLoading(); 
+                    return; 
+                }
+            }
+            
+            const docData = { 
+                DocumentName: docName.value, 
+                GoogleDriveURL: docUrl.value, 
+                Description: docDescription.value, 
+                Category: category, 
+                Tags: docTags.value 
+            };
+            
+            const result = await callBackend('addDocument', docData);
+            if (result.success) {
+                const newDoc = { 
+                    ...docData, 
+                    DocID: result.docId, 
+                    DateAdded: new Date().toISOString(), 
+                    SharedBy: state.user.email, 
+                    FileType: getFileTypeFromUrl(docData.GoogleDriveURL), 
+                    Status: 'Active' 
+                };
+                state.documents.unshift(newDoc);
+                
+                handlePageNavigation('documents');
+                closeModal('addDocumentModal');
+                e.target.reset();
+                showToast('Document added successfully! 🎉', 'success');
+            } else { 
+                showToast(result.error, 'error'); 
+            }
+            hideLoading();
+        }
+
+        async function handleEditDocument(e) {
+            e.preventDefault(); 
+            showLoading();
+            
+            const docId = document.getElementById('editDocId').value;
+            const updates = { 
+                DocumentName: editDocName.value, 
+                GoogleDriveURL: editDocUrl.value, 
+                Description: editDocDescription.value, 
+                Category: editDocCategory.value, 
+                Tags: editDocTags.value 
+            };
+            
+            const result = await callBackend('updateDocument', docId, updates);
+            if (result.success) {
+                const docIndex = state.documents.findIndex(d => d.DocID === docId);
+                if (docIndex > -1) {
+                    state.documents[docIndex] = { 
+                        ...state.documents[docIndex], 
+                        ...updates, 
+                        LastModified: new Date().toISOString() 
+                    };
+                }
+                renderApp();
+                closeModal('editDocumentModal');
+                showToast('Document updated successfully! ✨', 'success');
+            } else { 
+                showToast(result.error, 'error'); 
+            }
+            hideLoading();
+        }
+        
+        async function openDocument(docId) {
+            const doc = state.documents.find(d => d.DocID === docId);
+            if (doc && doc.GoogleDriveURL) { 
+                window.open(doc.GoogleDriveURL, '_blank'); 
+                await callBackend('recordDocumentView', docId); 
+            } else { 
+                showToast('Document URL is missing', 'error'); 
+            }
+        }
+        
+        async function archiveDocument(docId) {
+            if (confirm('Are you sure you want to archive this document?')) {
+                showLoading();
+                const result = await callBackend('archiveDocument', docId);
+                if (result.success) {
+                    const doc = state.documents.find(d => d.DocID === docId);
+                    if (doc) doc.Status = 'Archived';
+                    renderApp();
+                    showToast('Document archived successfully', 'info');
+                } else { 
+                    showToast(result.error, 'error'); 
+                }
+                hideLoading();
+            }
+        }
+
+        // UI Helper Functions
+        function showLoading() { 
+            document.getElementById('loadingOverlay').classList.add('show'); 
+        }
+        
+        function hideLoading() { 
+            document.getElementById('loadingOverlay').classList.remove('show'); 
+        }
+        
+        function showToast(message, type = 'info', duration = 4000) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon">${getToastIcon(type)}</div>
+                <div class="toast-message">${message}</div>
+                <div class="toast-close" onclick="this.parentElement.remove()">✕</div>
+            `;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                if (toast.parentElement) {
+                    toast.remove();
+                }
+            }, duration);
+        }
+        
+        function showError(message) { 
+            document.body.innerHTML = `
+                <div style="display: flex; align-items: center; justify-content: center; height: 100vh; text-align: center; padding: 40px; background: var(--background);">
+                    <div style="background: white; padding: 48px; border-radius: 16px; box-shadow: var(--shadow-lg); max-width: 500px;">
+                        <div style="font-size: 48px; margin-bottom: 24px;">⚠️</div>
+                        <h1 style="color: var(--gray-800); margin-bottom: 16px;">Something went wrong</h1>
+                        <p style="color: var(--gray-600); margin-bottom: 24px;">${message}</p>
+                        <button class="btn btn-primary" onclick="window.location.reload()">Try Again</button>
+                    </div>
+                </div>
+            `; 
+        }
+        
+        function getToastIcon(type) { 
+            return {
+                'success': '✓', 
+                'error': '✕', 
+                'warning': '!', 
+                'info': 'ℹ'
+            }[type] || 'ℹ'; 
+        }
+        
+        function showAddDocumentModal() { 
+            document.getElementById('addDocumentForm').reset(); 
+            if(state.lastCategoryUsed) {
+                document.getElementById('docCategory').value = state.lastCategoryUsed;
+            }
+            showModal('addDocumentModal'); 
+        }
+        
+        function showEditModal(docId) {
+            const doc = state.documents.find(d => d.DocID === docId);
+            if (doc) {
+                document.getElementById('editDocId').value = doc.DocID;
+                document.getElementById('editDocName').value = doc.DocumentName;
+                document.getElementById('editDocUrl').value = doc.GoogleDriveURL;
+                document.getElementById('editDocDescription').value = doc.Description;
+                document.getElementById('editDocCategory').value = doc.Category;
+                document.getElementById('editDocTags').value = doc.Tags;
+                showModal('editDocumentModal');
+            }
+        }
+        
+        function showModal(id) { 
+            const modal = document.getElementById(id);
+            modal.classList.add('show');
+            
+            // Prevent body scroll when modal is open
+            document.body.style.overflow = 'hidden';
+            
+            // Focus first input in modal for better UX
+            setTimeout(() => {
+                const firstInput = modal.querySelector('input, textarea, select');
+                if (firstInput) {
+                    firstInput.focus();
+                }
+                
+                // Check if modal content is scrollable and show indicator
+                checkModalScrollability(modal);
+            }, 100);
+        }
+        
+        function closeModal(id) { 
+            const modal = document.getElementById(id);
+            modal.classList.remove('show');
+            
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+        
+        function closeAllModals() { 
+            document.querySelectorAll('.modal-overlay').forEach(modal => {
+                modal.classList.remove('show');
+            });
+            
+            // Restore body scroll
+            document.body.style.overflow = '';
+        }
+
+        function checkModalScrollability(modal) {
+            const modalBody = modal.querySelector('.modal-body');
+            const scrollIndicator = modal.querySelector('.modal-scroll-indicator');
+            
+            if (modalBody && scrollIndicator) {
+                const hasScroll = modalBody.scrollHeight > modalBody.clientHeight;
+                
+                if (hasScroll) {
+                    scrollIndicator.classList.add('show');
+                    
+                    // Hide indicator when user scrolls to bottom
+                    modalBody.addEventListener('scroll', function() {
+                        const isNearBottom = modalBody.scrollTop + modalBody.clientHeight >= modalBody.scrollHeight - 20;
+                        if (isNearBottom) {
+                            scrollIndicator.classList.remove('show');
+                        } else {
+                            scrollIndicator.classList.add('show');
+                        }
+                    });
+                } else {
+                    scrollIndicator.classList.remove('show');
+                }
+            }
+        }
+        
+        function showNewCategoryInput(e) { 
+            e.preventDefault(); 
+            document.getElementById('newCategoryGroup').classList.toggle('hidden'); 
+        }
+        
+        function toggleSidebar() { 
+            document.getElementById('sidebar').classList.toggle('show');
+        }
+
+        // Data & State Helpers
+        function getFilteredDocuments() {
+            let docs = state.documents;
+            
+            if (state.filters.status.length) {
+                docs = docs.filter(d => state.filters.status.includes(d.Status));
+            }
+            if (state.filters.categories.length) {
+                docs = docs.filter(d => state.filters.categories.includes(d.Category));
+            }
+            if (state.filters.fileTypes.length) {
+                docs = docs.filter(d => state.filters.fileTypes.includes(d.FileType));
+            }
+            if (state.filters.search) {
+                const search = state.filters.search.toLowerCase();
+                docs = docs.filter(d => 
+                    Object.values(d).some(val => String(val).toLowerCase().includes(search))
+                );
+            }
+            
+            return docs.sort((a, b) => new Date(b.LastModified || b.DateAdded) - new Date(a.LastModified || a.DateAdded));
+        }
+        
+        function clearAllFilters(shouldRender = true) { 
+            state.filters.categories = []; 
+            state.filters.fileTypes = []; 
+            state.filters.search = '';
+            
+            // Update UI to reflect cleared filters
+            document.querySelectorAll('.filter-item').forEach(item => {
+                const checkbox = item.querySelector('.filter-checkbox');
+                const isStatusFilter = item.dataset.filter === 'status' && item.dataset.value === 'Active';
+                
+                if (isStatusFilter) {
+                    // Keep Active status checked by default
+                    item.classList.add('active');
+                    if (checkbox) checkbox.checked = true;
+                } else {
+                    // Clear other filters
+                    item.classList.remove('active');
+                    if (checkbox) checkbox.checked = false;
+                }
+            });
+            
+            // Clear search input if it exists
+            const searchInput = document.getElementById('mainSearchInput');
+            if (searchInput) searchInput.value = '';
+            
+            if (shouldRender) {
+                renderFilters();
+                updateFilterIndicators();
+                renderCurrentPage(); 
+            }
+        }
+
+        // Utility Functions
+        function debounce(func, delay) { 
+            let timeout; 
+            return function(...args) { 
+                clearTimeout(timeout); 
+                timeout = setTimeout(() => func.apply(this, args), delay); 
+            }; 
+        }
+        
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('en-US', { 
+                month: 'short', 
+                day: 'numeric', 
+                year: 'numeric' 
+            }); 
+        }
+        
+        function formatRelativeTime(dateString) { 
+            const seconds = Math.round((new Date() - new Date(dateString)) / 1000);
+            const minutes = Math.round(seconds / 60);
+            const hours = Math.round(minutes / 60);
+            const days = Math.round(hours / 24);
+            
+            if (seconds < 60) return "just now"; 
+            if (minutes < 60) return `${minutes}m ago`; 
+            if (hours < 24) return `${hours}h ago`; 
+            return `${days}d ago`; 
+        }
+        
+        function getFileTypeClass(type) { 
+            return {
+                'Google Doc': 'doc', 
+                'Google Sheet': 'sheet', 
+                'Google Slides': 'slides', 
+                'Google Form': 'form', 
+                'PDF': 'pdf', 
+                'Image': 'image'
+            }[type] || 'other'; 
+        }
+        
+        function getFileTypeIcon(type) { 
+            return {
+                'Google Doc': '📄', 
+                'Google Sheet': '📊', 
+                'Google Slides': '🖼️', 
+                'Google Form': '📝', 
+                'PDF': '📕', 
+                'Image': '📷'
+            }[type] || '🔗'; 
+        }
+        
+        function getCategoryIcon(name) { 
+            const iconMap = {
+                'ADMINISTRATION': '⚙️', 
+                'CI': '🚀', 
+                'DASHBOARD': '📈', 
+                'DIGITAL': '💻', 
+                'INDUS': '🏭', 
+                'LEGAL': '⚖️', 
+                'PEOPLE': '👥', 
+                'PURCHASE': '🛒', 
+                'QUALITY': '⭐', 
+                'SD': '🌍', 
+                'SUPPLY': '🚚'
+            }; 
+            return iconMap[name.toUpperCase()] || '📁'; 
+        }
+        
+        function getFileTypeFromUrl(url) { 
+            if (!url) return 'Other'; 
+            if (url.includes('/document/')) return 'Google Doc'; 
+            if (url.includes('/spreadsheets/')) return 'Google Sheet'; 
+            if (url.includes('/presentation/')) return 'Google Slides'; 
+            if (url.includes('/forms/')) return 'Google Form'; 
+            if (url.includes('.pdf')) return 'PDF'; 
+            return 'Other'; 
+        }
+        
+        function getDisplayName(email) { 
+            if (!email) return 'Unknown'; 
+            return email.split('@')[0].split('.').map(p => 
+                p.charAt(0).toUpperCase() + p.slice(1)
+            ).join(' '); 
+        }
+        
+        function getAvatar(email) { 
+            const user = state.onlineUsers.find(u => u.email === email); 
+            return user ? user.avatar : '👤'; 
+        }
+        
+        function highlightText(text) { 
+            if (!state.filters.search || !text) return text; 
+            const regex = new RegExp(`(${state.filters.search})`, 'gi'); 
+            return text.replace(regex, '<span class="highlight">$1</span>'); 
+        }
+        
+        // Heartbeat for online status
+        function startHeartbeat() { 
+            setInterval(async () => { 
+                await callBackend('trackUserSession'); 
+                const data = await callBackend('getOnlineUsers'); 
+                if (data.success) { 
+                    state.onlineUsers = data.users; 
+                    renderOnlineUsers(); 
+                } 
+            }, 60000); 
+        }
+    </script>
+</body>
+</html>
